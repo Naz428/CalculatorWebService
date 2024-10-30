@@ -1,1 +1,126 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/"
+    xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+    xmlns:tns="http://localhost/calculator"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    targetNamespace="http://localhost/calculator"
+    name="CalculatorService">
+
+	<types>
+		<xsd:schema targetNamespace="http://localhost/calculator">
+			<xsd:element name="CalculateRequest">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="numbers" type="xsd:double" minOccurs="1" maxOccurs="unbounded"/>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="CalculateResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="result" type="xsd:double"/>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+		</xsd:schema>
+	</types>
+
+	<message name="CalculateRequestMessage">
+		<part name="parameters" element="tns:CalculateRequest"/>
+	</message>
+	<message name="CalculateResponseMessage">
+		<part name="parameters" element="tns:CalculateResponse"/>
+	</message>
+
+	<portType name="CalculatorPortType">
+		<operation name="Add">
+			<input message="tns:CalculateRequestMessage"/>
+			<output message="tns:CalculateResponseMessage"/>
+		</operation>
+		<operation name="Subtract">
+			<input message="tns:CalculateRequestMessage"/>
+			<output message="tns:CalculateResponseMessage"/>
+		</operation>
+		<operation name="Multiply">
+			<input message="tns:CalculateRequestMessage"/>
+			<output message="tns:CalculateResponseMessage"/>
+		</operation>
+		<operation name="Divide">
+			<input message="tns:CalculateRequestMessage"/>
+			<output message="tns:CalculateResponseMessage"/>
+		</operation>
+		<operation name="SquareRoot">
+			<input message="tns:CalculateRequestMessage"/>
+			<output message="tns:CalculateResponseMessage"/>
+		</operation>
+		<operation name="Power">
+			<input message="tns:CalculateRequestMessage"/>
+			<output message="tns:CalculateResponseMessage"/>
+		</operation>
+	</portType>
+
+	<binding name="CalculatorBinding" type="tns:CalculatorPortType">
+		<soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
+		<operation name="Add">
+			<soap:operation soapAction="http://localhost/calculator/add"/>
+			<input>
+				<soap:body use="literal"/>
+			</input>
+			<output>
+				<soap:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="Subtract">
+			<soap:operation soapAction="http://localhost/calculator/subtract"/>
+			<input>
+				<soap:body use="literal"/>
+			</input>
+			<output>
+				<soap:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="Multiply">
+			<soap:operation soapAction="http://localhost/calculator/multiply"/>
+			<input>
+				<soap:body use="literal"/>
+			</input>
+			<output>
+				<soap:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="Divide">
+			<soap:operation soapAction="http://localhost/calculator/divide"/>
+			<input>
+				<soap:body use="literal"/>
+			</input>
+			<output>
+				<soap:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="SquareRoot">
+			<soap:operation soapAction="http://localhost/calculator/sqrt"/>
+			<input>
+				<soap:body use="literal"/>
+			</input>
+			<output>
+				<soap:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="Power">
+			<soap:operation soapAction="http://localhost/calculator/power"/>
+			<input>
+				<soap:body use="literal"/>
+			</input>
+			<output>
+				<soap:body use="literal"/>
+			</output>
+		</operation>
+	</binding>
+
+	<service name="CalculatorService">
+		<documentation>WSDL-документ для веб-сервісу калькулятора.</documentation>
+		<port name="CalculatorPort" binding="tns:CalculatorBinding">
+			<soap:address location="http://localhost:7128/api/calculator"/>
+		</port>
+	</service>
+</definitions>
